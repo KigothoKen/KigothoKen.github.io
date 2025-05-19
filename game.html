@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Super Mario Clone - Kenneth Kigotho</title>
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background-color: #333;
+            font-family: 'Poppins', sans-serif;
+        }
+        .game-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem;
+        }
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 2rem;
+        }
+        .header h1 {
+            margin: 0 0 1rem 0;
+        }
+        .header a {
+            color: #2563eb;
+            text-decoration: none;
+        }
+        .header a:hover {
+            text-decoration: underline;
+        }
+        canvas {
+            border: 2px solid #fff;
+        }
+        .controls {
+            color: white;
+            margin-top: 2rem;
+            text-align: center;
+        }
+        .controls h2 {
+            margin-bottom: 1rem;
+        }
+        .controls p {
+            margin: 0.5rem 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <div class="header">
+            <h1>Super Mario Clone</h1>
+            <a href="/">← Back to Portfolio</a>
+        </div>
+        <canvas id="gameCanvas"></canvas>
+        <div class="controls">
+            <h2>Controls</h2>
+            <p>Use Arrow Keys or Space to move and jump</p>
+            <p>← → to move left/right</p>
+            <p>↑ or Space to jump</p>
+        </div>
+    </div>
+    <script src="js/sprites.js"></script>
+    <script src="js/input.js"></script>
+    <script src="js/obstacles.js"></script>
+    <script src="js/player.js"></script>
+    <script src="js/game.js"></script>
+    <script src="js/screenshot.js"></script>
+</body>
+</html> 

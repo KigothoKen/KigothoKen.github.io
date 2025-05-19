@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image to Text - Kenneth Kigotho</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .ocr-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .upload-area {
+            border: 2px dashed #2563eb;
+            border-radius: 8px;
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .upload-area:hover {
+            background: #f0f7ff;
+        }
+        .upload-area i {
+            font-size: 3rem;
+            color: #2563eb;
+            margin-bottom: 1rem;
+        }
+        .preview-area {
+            display: none;
+            margin-bottom: 2rem;
+        }
+        .preview-area img {
+            max-width: 100%;
+            max-height: 400px;
+            border-radius: 8px;
+        }
+        .result-area {
+            display: none;
+        }
+        .result-text {
+            width: 100%;
+            min-height: 200px;
+            padding: 1rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            font-family: 'Poppins', sans-serif;
+        }
+        .copy-btn {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+        }
+        .copy-btn:hover {
+            background: #1d4ed8;
+        }
+        .loading {
+            display: none;
+            text-align: center;
+            margin: 2rem 0;
+        }
+        .loading i {
+            font-size: 2rem;
+            color: #2563eb;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .header a {
+            color: #2563eb;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .header a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="ocr-container">
+        <div class="header">
+            <a href="/"><i class="fas fa-arrow-left"></i> Back to Portfolio</a>
+            <h1>Image to Text Converter</h1>
+            <p>Upload an image containing text to convert it into editable text</p>
+        </div>
+        
+        <div class="upload-area" id="uploadArea">
+            <i class="fas fa-cloud-upload-alt"></i>
+            <h3>Drop your image here</h3>
+            <p>or click to select a file</p>
+            <input type="file" id="fileInput" accept="image/*" style="display: none;">
+        </div>
+
+        <div class="preview-area" id="previewArea">
+            <h3>Image Preview</h3>
+            <img id="imagePreview" alt="Preview">
+        </div>
+
+        <div class="loading" id="loading">
+            <i class="fas fa-spinner"></i>
+            <p>Converting image to text...</p>
+        </div>
+
+        <div class="result-area" id="resultArea">
+            <h3>Extracted Text</h3>
+            <textarea class="result-text" id="resultText" readonly></textarea>
+            <button class="copy-btn" id="copyBtn">
+                <i class="fas fa-copy"></i> Copy Text
+            </button>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/tesseract.js@v2.1.0/dist/tesseract.min.js"></script>
+    <script src="js/ocr.js"></script>
+</body>
+</html> 

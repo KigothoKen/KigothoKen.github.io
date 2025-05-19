@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - Kenneth Kigotho</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8fafc;
+        }
+        .blog-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 2rem;
+        }
+        .blog-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        .blog-header a {
+            color: #2563eb;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        .blog-header a:hover {
+            text-decoration: underline;
+        }
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        .blog-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            cursor: pointer;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        .blog-card:hover {
+            transform: translateY(-5px);
+        }
+        .blog-card-image {
+            width: 100%;
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+        }
+        .blog-card-content {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .blog-card-content h2 {
+            margin: 0 0 1rem;
+            font-size: 1.25rem;
+            color: #1a1a1a;
+        }
+        .blog-card-content p {
+            color: #666;
+            margin: 0;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        .blog-card-meta {
+            margin-top: auto;
+            padding-top: 1rem;
+            font-size: 0.9rem;
+            color: #666;
+        }
+        #articleContainer {
+            display: none;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .blog-post {
+            display: none;
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+        .post-meta {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .post-meta i {
+            color: #2563eb;
+        }
+        .post-content {
+            line-height: 1.8;
+        }
+        .post-content h2 {
+            color: #1a1a1a;
+            margin: 2rem 0 1rem;
+        }
+        .post-content p {
+            margin-bottom: 1.5rem;
+        }
+        .post-content ul {
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+        }
+        .post-content li {
+            margin-bottom: 0.5rem;
+        }
+        .highlight-box {
+            background: #f8fafc;
+            border-left: 4px solid #2563eb;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            margin: 2rem 0;
+        }
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 8px;
+        }
+        .back-to-articles {
+            display: none;
+            margin-bottom: 2rem;
+            color: #2563eb;
+            text-decoration: none;
+            cursor: pointer;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .back-to-articles:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="blog-container">
+        <div class="blog-header">
+            <a href="/"><i class="fas fa-arrow-left"></i> Back to Portfolio</a>
+            <h1>Blog</h1>
+        </div>
+
+        <!-- Blog Grid View -->
+        <div id="blogGrid" class="blog-grid">
+            <div class="blog-card" onclick="showArticle('vibe-coding')">
+                <div class="blog-card-image" style="background-image: url('https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=600&h=400&q=80')"></div>
+                <div class="blog-card-content">
+                    <h2>Vibe Coding: A Modern Approach</h2>
+                    <p>Explore the innovative development philosophy that emphasizes developer well-being, creative flow, and sustainable productivity.</p>
+                    <div class="blog-card-meta">
+                        <i class="far fa-clock"></i> 5 min read
+                    </div>
+                </div>
+            </div>
+
+                        <div class="blog-card" onclick="showArticle('bug-bounty')">                <div class="blog-card-image" style="background-image: url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=600&h=400&q=80')"></div>                <div class="blog-card-content">                    <h2>Getting Started with Bug Bounty Hunting</h2>                    <p>A comprehensive guide for aspiring security researchers to begin their journey in bug bounty hunting.</p>                    <div class="blog-card-meta">                        <i class="far fa-clock"></i> 7 min read                    </div>                </div>            </div>            <div class="blog-card" onclick="showArticle('ai-avatars')">                <div class="blog-card-image" style="background-image: url('https://images.unsplash.com/photo-1507146153580-69a1fe6d8aa1?auto=format&fit=crop&w=600&h=400&q=80')"></div>                <div class="blog-card-content">                    <h2>The Rise of AI Avatars: Digital Identity Revolution</h2>                    <p>Explore how artificial intelligence is transforming digital representation and virtual interactions through advanced avatar technology.</p>                    <div class="blog-card-meta">                        <i class="far fa-clock"></i> 6 min read                    </div>                </div>            </div>        </div>
+
+        <!-- Article Container -->
+        <div id="articleContainer">
+            <a class="back-to-articles" onclick="showArticles()">
+                <i class="fas fa-arrow-left"></i> Back to Articles
+            </a>
+
+            <!-- Vibe Coding Article -->
+            <article class="blog-post" id="vibe-coding">
+                <h1>Vibe Coding: A Modern Approach to Software Development</h1>
+                <div class="post-meta">
+                    <span><i class="far fa-calendar"></i> May 18, 2024</span>
+                    <span><i class="far fa-clock"></i> 5 min read</span>
+                </div>
+                <div class="post-content">
+                    <p>
+                        As a Business Information Technology professional, I've had the opportunity to explore various development methodologies. Today, I want to share my insights about Vibe Coding - a modern approach to software development that's gaining traction in the industry.
+                    </p>
+
+                    <div class="highlight-box">
+                        <p><strong>What is Vibe Coding?</strong> It's a development philosophy that emphasizes developer well-being, creative flow, and sustainable productivity while maintaining high code quality.</p>
+                    </div>
+
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/P5Ro3PfafGg" 
+                                title="Vibe Coding Explained" 
+                                frameborder="0" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                allowfullscreen>
+                        </iframe>
+                    </div>
+
+                    <h2>Advantages of Vibe Coding</h2>
+                    <ul>
+                        <li><strong>Enhanced Developer Flow:</strong> By creating an environment that promotes focus and creativity, developers can enter and maintain a state of flow more easily.</li>
+                        <li><strong>Better Work-Life Balance:</strong> The methodology emphasizes sustainable development practices that prevent burnout and promote long-term productivity.</li>
+                        <li><strong>Improved Code Quality:</strong> With a more relaxed and focused mind, developers tend to write cleaner, more maintainable code.</li>
+                        <li><strong>Increased Innovation:</strong> The creative atmosphere encourages thinking outside the box and finding novel solutions to problems.</li>
+                        <li><strong>Better Team Collaboration:</strong> The positive environment fosters better communication and team dynamics.</li>
+                    </ul>
+
+                    <h2>Potential Challenges</h2>
+                    <ul>
+                        <li><strong>Initial Adjustment Period:</strong> Teams used to traditional development methods may need time to adapt to this new approach.</li>
+                        <li><strong>Finding the Right Balance:</strong> It can be challenging to maintain the perfect balance between relaxation and productivity.</li>
+                        <li><strong>Not Suitable for All Projects:</strong> High-pressure or strict deadline projects might require a more structured approach.</li>
+                        <li><strong>Measuring Productivity:</strong> Traditional metrics might not accurately reflect the quality improvements and long-term benefits.</li>
+                    </ul>
+
+                    <h2>Best Practices for Implementation</h2>
+                    <p>
+                        To successfully implement Vibe Coding in your development process, consider these key practices:
+                    </p>
+                    <ul>
+                        <li>Create a comfortable and inspiring workspace</li>
+                        <li>Incorporate regular breaks and mindfulness practices</li>
+                        <li>Use music or ambient sounds to enhance focus</li>
+                        <li>Implement flexible working hours when possible</li>
+                        <li>Foster a supportive team culture</li>
+                    </ul>
+
+                    <div class="highlight-box">
+                        <h3>Personal Experience</h3>
+                        <p>
+                            In my projects, I've found that adopting Vibe Coding principles has led to more sustainable development cycles and higher-quality code. While it required some adjustment, the long-term benefits in terms of code quality and team satisfaction have been significant.
+                        </p>
+                    </div>
+
+                    <h2>Conclusion</h2>
+                    <p>
+                        Vibe Coding represents a shift towards more sustainable and enjoyable software development. While it may not be perfect for every situation, its principles can help create better code and happier developers. As our industry continues to evolve, approaches like Vibe Coding will become increasingly important in maintaining both code quality and developer well-being.
+                    </p>
+                </div>
+            </article>
+
+            <!-- Bug Bounty Article -->
+            <article class="blog-post" id="bug-bounty">
+                <h1>Getting Started with Bug Bounty Hunting: A Guide for Aspiring Security Researchers</h1>
+                <div class="post-meta">
+                    <span><i class="far fa-calendar"></i> May 18, 2024</span>
+                    <span><i class="far fa-clock"></i> 7 min read</span>
+                </div>
+                <div class="post-content">
+                    <p>
+                        Bug bounty hunting has become an increasingly popular way for security researchers to make a meaningful impact on internet security while earning rewards. In this guide, I'll share insights into getting started with bug bounty hunting and best practices for success.
+                    </p>
+
+                                        <div class="highlight-box">                        <p><strong>What is Bug Bounty Hunting?</strong> It's a practice where organizations reward individuals for discovering and reporting security vulnerabilities in their systems, applications, or websites.</p>                    </div>                    <div class="video-container">                        <iframe src="https://www.youtube.com/embed/videoseries?list=PLGaP5A7kL2tEZM62Cv3PxI0CzpntwcOJE"                                title="Bug Bounty Hunting Tutorial Series"                                frameborder="0"                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"                                allowfullscreen>                        </iframe>                    </div>                    <h2>Essential Skills for Bug Bounty Hunters</h2>
+                    <ul>
+                        <li><strong>Web Technologies:</strong> Understanding HTML, JavaScript, HTTP protocols, and web architecture</li>
+                        <li><strong>Security Concepts:</strong> Knowledge of common vulnerabilities (XSS, CSRF, SQLi, etc.)</li>
+                        <li><strong>Programming:</strong> Basic scripting abilities for automation and exploit development</li>
+                        <li><strong>Networking:</strong> Understanding of network protocols and traffic analysis</li>
+                        <li><strong>Problem-Solving:</strong> Creative thinking and persistence in finding vulnerabilities</li>
+                    </ul>
+
+                    <h2>Getting Started</h2>
+                    <p>
+                        Here's a structured approach to begin your bug bounty journey:
+                    </p>
+                    <ul>
+                        <li>Learn the basics of web security and common vulnerabilities</li>
+                        <li>Set up a testing environment with necessary tools</li>
+                        <li>Practice on vulnerable applications (DVWA, OWASP WebGoat)</li>
+                        <li>Join bug bounty platforms (HackerOne, Bugcrowd)</li>
+                        <li>Start with public programs that welcome beginners</li>
+                    </ul>
+
+                    <h2>Essential Tools</h2>
+                    <ul>
+                        <li><strong>Burp Suite:</strong> Web proxy for intercepting and modifying HTTP traffic</li>
+                        <li><strong>OWASP ZAP:</strong> Free security testing tool for finding vulnerabilities</li>
+                        <li><strong>Nmap:</strong> Network discovery and security auditing</li>
+                        <li><strong>Browser Developer Tools:</strong> For analyzing web applications</li>
+                        <li><strong>Various Scripts and Extensions:</strong> For automation and efficiency</li>
+                    </ul>
+
+                    <div class="highlight-box">
+                        <h3>Tips for Success</h3>
+                        <ul>
+                            <li>Focus on quality over quantity in bug reports</li>
+                            <li>Document findings clearly and professionally</li>
+                            <li>Follow responsible disclosure practices</li>
+                            <li>Network with other researchers and learn from their experiences</li>
+                            <li>Stay updated with the latest security trends and vulnerabilities</li>
+                        </ul>
+                    </div>
+
+                    <h2>Common Challenges</h2>
+                    <ul>
+                        <li><strong>Competition:</strong> Popular programs can be highly competitive</li>
+                        <li><strong>Duplicate Reports:</strong> Others might find the same vulnerabilities</li>
+                        <li><strong>Learning Curve:</strong> Initial difficulty in finding valid vulnerabilities</li>
+                        <li><strong>Time Investment:</strong> Building expertise requires significant dedication</li>
+                    </ul>
+
+                    <h2>Conclusion</h2>
+                    <p>
+                        Bug bounty hunting offers an exciting opportunity to contribute to cybersecurity while developing valuable skills. Success requires patience, continuous learning, and dedication. Start small, build your skills gradually, and remember that every expert was once a beginner.
+                    </p>
+                </div>
+                        </article>            <!-- AI Avatars Article -->            <article class="blog-post" id="ai-avatars">                <h1>The Rise of AI Avatars: Digital Identity Revolution</h1>                <div class="post-meta">                    <span><i class="far fa-calendar"></i> May 18, 2024</span>                    <span><i class="far fa-clock"></i> 6 min read</span>                </div>                <div class="post-content">                    <p>                        Artificial Intelligence is revolutionizing how we represent ourselves in digital spaces. From social media to virtual meetings, AI avatars are becoming increasingly sophisticated and personalized, offering new ways to express our digital identity.                    </p>                    <div class="highlight-box">                        <p><strong>What are AI Avatars?</strong> AI avatars are digital representations of individuals created and animated using artificial intelligence, capable of mimicking human expressions, movements, and even personalities.</p>                    </div>                    <div class="video-container">                        <iframe src="https://www.youtube.com/embed/videoseries?list=PLGaP5A7kL2tHCgrjzAkhSjh9pgxl78wTn"                                title="AI Avatars Tutorial Series"                                frameborder="0"                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"                                allowfullscreen>                        </iframe>                    </div>                    <h2>Key Applications of AI Avatars</h2>                    <ul>                        <li><strong>Virtual Meetings:</strong> Creating more engaging and personalized online meeting experiences</li>                        <li><strong>Content Creation:</strong> Generating dynamic video content with customized virtual presenters</li>                        <li><strong>Gaming:</strong> Developing realistic and responsive character representations</li>                        <li><strong>Social Media:</strong> Enhancing online presence with animated personal avatars</li>                        <li><strong>Virtual Events:</strong> Hosting immersive digital experiences with AI-powered hosts</li>                    </ul>                    <h2>Technology Behind AI Avatars</h2>                    <ul>                        <li><strong>Deep Learning:</strong> Advanced neural networks for realistic facial expressions and movements</li>                        <li><strong>Computer Vision:</strong> Real-time tracking and mapping of facial features</li>                        <li><strong>Natural Language Processing:</strong> Enabling natural conversations and responses</li>                        <li><strong>3D Modeling:</strong> Creating detailed and customizable avatar appearances</li>                        <li><strong>Motion Capture:</strong> Translating real movements into avatar animations</li>                    </ul>                    <h2>Benefits and Opportunities</h2>                    <p>                        AI avatars offer numerous advantages in our increasingly digital world:                    </p>                    <ul>                        <li>Enhanced online privacy while maintaining personal connection</li>                        <li>Reduced video conferencing fatigue</li>                        <li>More inclusive digital representation options</li>                        <li>Scalable content creation capabilities</li>                        <li>Improved accessibility in virtual environments</li>                    </ul>                    <div class="highlight-box">                        <h3>Future Implications</h3>                        <p>                            As AI avatar technology continues to evolve, we're likely to see even more innovative applications in education, healthcare, entertainment, and professional communications. The potential for personalized, engaging digital interactions is just beginning to be realized.                        </p>                    </div>                    <h2>Challenges and Considerations</h2>                    <ul>                        <li><strong>Ethical Concerns:</strong> Issues around identity verification and potential misuse</li>                        <li><strong>Technical Limitations:</strong> Current constraints in real-time rendering and processing</li>                        <li><strong>User Adoption:</strong> Overcoming initial resistance to virtual representations</li>                        <li><strong>Privacy:</strong> Protecting personal data used in avatar creation</li>                        <li><strong>Authenticity:</strong> Maintaining genuine human connection through digital mediums</li>                    </ul>                    <h2>Getting Started with AI Avatars</h2>                    <p>                        For those interested in exploring AI avatar technology:                    </p>                    <ul>                        <li>Experiment with available avatar creation platforms</li>                        <li>Learn about the underlying AI technologies</li>                        <li>Consider potential applications in your field</li>                        <li>Stay informed about new developments and tools</li>                        <li>Engage with the AI avatar community</li>                    </ul>                    <h2>Conclusion</h2>                    <p>                        AI avatars represent a significant step forward in digital interaction and personal representation. As the technology continues to mature, we can expect to see increasingly sophisticated and practical applications across various sectors, fundamentally changing how we engage in digital spaces.                    </p>                </div>            </article>        </div>    </div>    <script>
+        function showArticle(articleId) {
+            // Hide grid and show article container
+            document.getElementById('blogGrid').style.display = 'none';
+            document.getElementById('articleContainer').style.display = 'block';
+            
+            // Hide all articles
+            document.querySelectorAll('.blog-post').forEach(article => {
+                article.style.display = 'none';
+            });
+            
+            // Show selected article and back button
+            document.getElementById(articleId).style.display = 'block';
+            document.querySelector('.back-to-articles').style.display = 'flex';
+        }
+
+        function showArticles() {
+            // Hide article container and show grid
+            document.getElementById('articleContainer').style.display = 'none';
+            document.getElementById('blogGrid').style.display = 'grid';
+        }
+
+        // Initialize view
+        document.addEventListener('DOMContentLoaded', () => {
+            showArticles();
+        });
+    </script>
+</body>
+</html> 
