@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pig Health Diagnostic - Demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding-top: 76px;
+        }
+        .diagnosis-section {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+        .upload-area {
+            border: 2px dashed #0d6efd;
+            border-radius: 10px;
+            padding: 30px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .upload-area:hover {
+            background: #f8f9fa;
+        }
+        .preview-image {
+            max-width: 100%;
+            max-height: 300px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+        .camera-feed {
+            width: 100%;
+            max-width: 640px;
+            margin: 20px auto;
+            border-radius: 8px;
+        }
+        .symptom-tag {
+            display: inline-block;
+            padding: 5px 15px;
+            margin: 5px;
+            background: #e9ecef;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .symptom-tag.selected {
+            background: #0d6efd;
+            color: white;
+        }
+        .result-card {
+            border-left: 4px solid #0d6efd;
+            margin: 10px 0;
+            padding: 15px;
+            background: white;
+        }
+        .confidence-bar {
+            height: 6px;
+            background: #e9ecef;
+            border-radius: 3px;
+            margin-top: 5px;
+        }
+        .confidence-level {
+            height: 100%;
+            background: #0d6efd;
+            border-radius: 3px;
+        }
+        .tab-content {
+            padding: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="/">Pig Health Diagnostic Tool</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container my-4">
+        <h2 class="text-center mb-4">Pig Health Diagnostic Demo</h2>
+        
+        <ul class="nav nav-pills mb-4 justify-content-center" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" data-bs-toggle="pill" data-bs-target="#image-upload" type="button">
+                    <i class="fas fa-upload me-2"></i>Upload Image
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" data-bs-toggle="pill" data-bs-target="#camera" type="button">
+                    <i class="fas fa-camera me-2"></i>Use Camera
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" data-bs-toggle="pill" data-bs-target="#symptoms" type="button">
+                    <i class="fas fa-clipboard-list me-2"></i>Input Symptoms
+                </button>
+            </li>
+        </ul>
+
+        <div class="tab-content">
+            <!-- Image Upload Tab -->
+            <div class="tab-pane fade show active" id="image-upload">
+                <div class="row">
+                    <div class="col-md-8 mx-auto">
+                        <form action="{{ url_for('analyze_image') }}" method="post" enctype="multipart/form-data">
+                            <div class="upload-area" id="dropZone">
+                                <i class="fas fa-cloud-upload-alt fa-3x text-primary mb-3"></i>
+                                <h4>Drag & Drop Image Here</h4>
+                                <p class="text-muted">or</p>
+                                <input type="file" id="fileInput" name="image" class="d-none" accept="image/*">
+                                <button type="button" class="btn btn-primary" onclick="document.getElementById('fileInput').click()">
+                                    Choose File
+                                </button>
+                            </div>
+                            <div id="imagePreview" class="text-center d-none">
+                                <img src="" alt="Preview" class="preview-image">
+                                <div class="mt-3">
+                                    <button type="submit" class="btn btn-primary">Analyze Image</button>
+                                    <button type="button" class="btn btn-secondary" onclick="resetImage()">Reset</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Camera Tab -->
+            <div class="tab-pane fade" id="camera">
+                <div class="row">
+                    <div class="col-md-8 mx-auto text-center">
+                        <video id="cameraFeed" class="camera-feed d-none"></video>
+                        <canvas id="captureCanvas" class="d-none"></canvas>
+                        <div id="cameraControls">
+                            <button class="btn btn-primary" onclick="startCamera()">
+                                <i class="fas fa-camera me-2"></i>Start Camera
+                            </button>
+                        </div>
+                        <div id="captureControls" class="mt-3 d-none">
+                            <button class="btn btn-primary" onclick="captureImage()">
+                                <i class="fas fa-camera me-2"></i>Capture
+                            </button>
+                            <button class="btn btn-secondary" onclick="resetCamera()">
+                                <i class="fas fa-redo me-2"></i>Reset
+                            </button>
+                        </div>
+                        <form id="captureForm" action="{{ url_for('analyze_image') }}" method="post" class="d-none">
+                            <input type="hidden" name="image_data" id="capturedImageData">
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Symptoms Tab -->
+            <div class="tab-pane fade" id="symptoms">
+                <div class="row">
+                    <div class="col-md-8 mx-auto">
+                        <form action="{{ url_for('analyze_symptoms') }}" method="post">
+                            <div class="mb-4">
+                                <h5>Select Observed Symptoms:</h5>
+                                <div id="symptomsList">
+                                    {% for symptom in symptoms %}
+                                    <span class="symptom-tag" onclick="toggleSymptom(this)">
+                                        <input type="checkbox" name="symptoms[]" value="{{ symptom }}" class="d-none">
+                                        {{ symptom }}
+                                    </span>
+                                    {% endfor %}
+                                </div>
+                                <button type="submit" class="btn btn-primary mt-3">
+                                    Analyze Symptoms
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Section -->
+        {% if results %}
+        <div id="results" class="diagnosis-section">
+            <h4 class="mb-4">Diagnostic Results</h4>
+            <div id="resultsList">
+                {% for result in results %}
+                <div class="result-card">
+                    <h5>{{ result.disease }}</h5>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <span>Confidence: {{ "%.1f"|format(result.confidence * 100) }}%</span>
+                    </div>
+                    <div class="confidence-bar">
+                        <div class="confidence-level" style="width: {{ result.confidence * 100 }}%"></div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // File Upload Handling
+        const dropZone = document.getElementById('dropZone');
+        const fileInput = document.getElementById('fileInput');
+        const imagePreview = document.getElementById('imagePreview');
+        const previewImage = imagePreview.querySelector('img');
+
+        dropZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            dropZone.style.borderColor = '#0d6efd';
+        });
+
+        dropZone.addEventListener('dragleave', (e) => {
+            e.preventDefault();
+            dropZone.style.borderColor = '#dee2e6';
+        });
+
+        dropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            const file = e.dataTransfer.files[0];
+            handleImageFile(file);
+        });
+
+        fileInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            handleImageFile(file);
+        });
+
+        function handleImageFile(file) {
+            if (file && file.type.startsWith('image/')) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    previewImage.src = e.target.result;
+                    dropZone.classList.add('d-none');
+                    imagePreview.classList.remove('d-none');
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function resetImage() {
+            fileInput.value = '';
+            imagePreview.classList.add('d-none');
+            dropZone.classList.remove('d-none');
+        }
+
+        // Camera Handling
+        let stream;
+        const cameraFeed = document.getElementById('cameraFeed');
+        const captureCanvas = document.getElementById('captureCanvas');
+        const cameraControls = document.getElementById('cameraControls');
+        const captureControls = document.getElementById('captureControls');
+        const captureForm = document.getElementById('captureForm');
+        const capturedImageData = document.getElementById('capturedImageData');
+
+        async function startCamera() {
+            try {
+                stream = await navigator.mediaDevices.getUserMedia({ video: true });
+                cameraFeed.srcObject = stream;
+                cameraFeed.classList.remove('d-none');
+                cameraControls.classList.add('d-none');
+                captureControls.classList.remove('d-none');
+                cameraFeed.play();
+            } catch (err) {
+                console.error('Error accessing camera:', err);
+                alert('Unable to access camera. Please make sure you have granted camera permissions.');
+            }
+        }
+
+        function captureImage() {
+            captureCanvas.width = cameraFeed.videoWidth;
+            captureCanvas.height = cameraFeed.videoHeight;
+            captureCanvas.getContext('2d').drawImage(cameraFeed, 0, 0);
+            const imageData = captureCanvas.toDataURL('image/jpeg');
+            capturedImageData.value = imageData;
+            captureForm.submit();
+        }
+
+        function resetCamera() {
+            if (stream) {
+                stream.getTracks().forEach(track => track.stop());
+            }
+            cameraFeed.classList.add('d-none');
+            captureControls.classList.add('d-none');
+            cameraControls.classList.remove('d-none');
+        }
+
+        // Symptom Analysis
+        function toggleSymptom(element) {
+            element.classList.toggle('selected');
+            const checkbox = element.querySelector('input[type="checkbox"]');
+            checkbox.checked = !checkbox.checked;
+        }
+    </script>
+</body>
+</html> 

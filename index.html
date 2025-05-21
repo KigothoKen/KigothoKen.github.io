@@ -3,234 +3,252 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kenneth Kigotho - Personal Portfolio</title>
-    <link rel="stylesheet" href="css/style.css">
+    <title>Pig Health Diagnostic Tool</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1516467508483-a7212febe31a?auto=format&fit=crop&w=2000&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 120px 0;
+            text-align: center;
+        }
+        .features {
+            padding: 80px 0;
+            background-color: #f8f9fa;
+        }
+        .feature-card {
+            padding: 30px;
+            margin: 15px 0;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            background: white;
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        .feature-icon {
+            font-size: 2.5rem;
+            color: #0d6efd;
+            margin-bottom: 20px;
+        }
+        .diseases-section {
+            padding: 80px 0;
+        }
+        .disease-item {
+            padding: 15px;
+            margin: 10px 0;
+            border-left: 4px solid #0d6efd;
+            background: #f8f9fa;
+        }
+        .demo-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #0d6efd 0%, #0099ff 100%);
+            color: white;
+        }
+        .tech-stack {
+            padding: 80px 0;
+        }
+        .tech-icon {
+            font-size: 3rem;
+            margin: 20px;
+            color: #6c757d;
+        }
+        .navbar {
+            padding: 20px 0;
+            background-color: rgba(33, 37, 41, 0.95) !important;
+        }
+        .nav-link {
+            color: white !important;
+            margin: 0 15px;
+        }
+    </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
         <div class="container">
-            <div class="logo">KK</div>
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                                <li><a href="#about">About</a></li>                <li><a href="#skills">Skills</a></li>                <li><a href="#projects">Projects</a></li>                <li><a href="/blog.html">Blog</a></li>                <li><a href="#contact">Contact</a></li>
-            </ul>
+            <a class="navbar-brand" href="#">Pig Health Diagnostic Tool</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#features">Features</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#diseases">Diseases</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#demo">Demo</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#tech">Technology</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="cybersecurity-article.html">Cybersecurity</a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero">
+    <section class="hero">
         <div class="container">
-            <div class="hero-content">
-                <div class="profile-image">
-                    <img src="images/kenneth-profile.png" alt="Kenneth Kigotho">
-                </div>
-                <h1>Kenneth Kigotho</h1>
-                <h2>Software Engineer</h2>
-                <p>Passionate about creating innovative solutions through code</p>
-                <div class="cta-buttons">
-                    <a href="#contact" class="btn primary">Get in Touch</a>
-                    <a href="#projects" class="btn secondary">View My Work</a>
-                </div>
+            <h1 class="display-4 mb-4">Pig Health Diagnostic Tool</h1>
+            <p class="lead mb-4">An AI-powered application for diagnosing pig health conditions through image analysis and symptom recognition</p>
+            <div class="d-flex justify-content-center gap-3">
+                <a href="https://github.com/KigothoKen/pig-health-diagnostic" class="btn btn-primary btn-lg">
+                    <i class="fab fa-github me-2"></i>View on GitHub
+                </a>
+                <a href="#demo" class="btn btn-outline-light btn-lg">Try Demo</a>
             </div>
         </div>
     </section>
 
-    <!-- About Section -->
-    <section id="about" class="about">
+    <section id="features" class="features">
         <div class="container">
-            <h2 class="section-title">About Me</h2>
-            <div class="about-content">
-                <div class="about-image">
-                    <img src="images/kenneth_kigotho_in_Beige_blazar_808058b8-8e07-4132-8084-ac69c6041119.png" alt="Kenneth Kigotho in Beige Blazer">
-                </div>
-                <div class="about-text">
-                    <p>I am a dedicated Software Engineer with a passion for creating efficient and innovative solutions. My journey in technology has equipped me with a strong foundation in software development and problem-solving skills.</p>
-                    <div class="stats">
-                        <div class="stat-item">
-                            <h3>Experience</h3>
-                            <p>Software Development</p>
-                        </div>
-                        <div class="stat-item">
-                                                        <h3>Education</h3>                            <p>Business Information Technology</p>
-                        </div>
-                        <div class="stat-item">
-                            <h3>Location</h3>
-                            <p>Kenya</p>
-                        </div>
+            <h2 class="text-center mb-5">Key Features</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="feature-card text-center">
+                        <i class="fas fa-camera feature-icon"></i>
+                        <h3>Image Analysis</h3>
+                        <p>Upload images of pigs for AI-powered disease detection using advanced computer vision techniques.</p>
                     </div>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Skills Section -->
-    <section id="skills" class="skills">
-        <div class="container">
-            <h2 class="section-title">Skills</h2>
-            <div class="skills-grid">
-                <div class="skill-card">
-                    <i class="fas fa-code"></i>
-                    <h3>Programming</h3>
-                    <p>Python, JavaScript, Java</p>
-                </div>
-                <div class="skill-card">
-                    <i class="fas fa-database"></i>
-                    <h3>Databases</h3>
-                    <p>MySQL, MongoDB</p>
-                </div>
-                <div class="skill-card">
-                    <i class="fas fa-laptop-code"></i>
-                    <h3>Web Development</h3>
-                    <p>HTML5, CSS3, React</p>
-                </div>
-                <div class="skill-card">
-                    <i class="fas fa-cogs"></i>
-                    <h3>Tools</h3>
-                    <p>Git, Docker, AWS</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Projects Section -->
-    <section id="projects" class="projects">
-        <div class="container">
-            <h2 class="section-title">Projects</h2>
-            <div class="projects-grid">
-                <div class="project-card">
-                    <div class="project-image">
-                        <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=400&h=250&q=80" alt="Super Mario Clone Game">
-                    </div>
-                    <div class="project-content">
-                        <h3>Super Mario Clone</h3>
-                        <p>A browser-based platformer game inspired by Super Mario. Features include player movement, jumping mechanics, and obstacle avoidance. Built with vanilla JavaScript and HTML5 Canvas.</p>
-                        <div class="project-tags">
-                            <span>JavaScript</span>
-                            <span>HTML5 Canvas</span>
-                            <span>Game Dev</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="/game.html" class="btn primary">Play Game</a>
-                            <a href="#" class="btn secondary">View Code</a>
-                        </div>
+                <div class="col-md-4">
+                    <div class="feature-card text-center">
+                        <i class="fas fa-stethoscope feature-icon"></i>
+                        <h3>Symptom Recognition</h3>
+                        <p>Input observed symptoms to receive accurate disease diagnosis and treatment recommendations.</p>
                     </div>
                 </div>
-                <div class="project-card">
-                    <div class="project-image">
-                        <img src="https://images.unsplash.com/photo-1555421689-491a97ff2040?auto=format&fit=crop&w=400&h=250&q=80" alt="OCR Application">
-                    </div>
-                    <div class="project-content">
-                        <h3>Image to Text Converter</h3>
-                        <p>A powerful OCR (Optical Character Recognition) application that converts text from images into editable text. Features include drag-and-drop upload, image preview, and copy-to-clipboard functionality.</p>
-                        <div class="project-tags">
-                            <span>JavaScript</span>
-                            <span>Tesseract.js</span>
-                            <span>OCR</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="/ocr.html" class="btn primary">Try It Out</a>
-                            <a href="#" class="btn secondary">View Code</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="project-card">
-                    <div class="project-image">
-                        <img src="https://images.unsplash.com/photo-1516467508483-a7212febe31a?auto=format&fit=crop&w=400&h=250&q=80" alt="Pig Health Diagnostic Tool">
-                    </div>
-                    <div class="project-content">
-                        <h3>Pig Health Diagnostic Tool</h3>
-                        <p>An AI-powered application for diagnosing pig health conditions through image analysis and symptom recognition. Features include disease detection, treatment recommendations, and preventive measures for 8 common pig diseases.</p>
-                        <div class="project-tags">
-                            <span>Python</span>
-                            <span>TensorFlow</span>
-                            <span>Flask</span>
-                            <span>AI/ML</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="/pig_health_app" class="btn primary">Try It Out</a>
-                            <a href="https://github.com/KigothoKen/pig-health-diagnostic" class="btn secondary">View Code</a>
-                        </div>
+                <div class="col-md-4">
+                    <div class="feature-card text-center">
+                        <i class="fas fa-brain feature-icon"></i>
+                        <h3>AI-Powered</h3>
+                        <p>Utilizes deep learning models trained on extensive datasets for accurate disease detection.</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Social Media Section -->
-    <section id="social" class="social">
+    <section id="diseases" class="diseases-section">
         <div class="container">
-            <h2 class="section-title">Connect With Me</h2>
-            <div class="social-content">
-                <div class="social-grid">
-                    <div class="social-card twitter-card">
-                        <div class="social-header">
-                            <i class="fab fa-twitter"></i>
-                            <h3>Twitter</h3>
-                        </div>
-                        <div class="twitter-timeline">
-                            <a class="twitter-timeline" 
-                               data-height="400" 
-                               data-theme="light" 
-                               href="https://twitter.com/ken_kigotho">
-                                Tweets by Kenneth Kigotho
-                            </a>
-                        </div>
+            <h2 class="text-center mb-5">Supported Diseases</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="disease-item">
+                        <h4>Swine Flu</h4>
+                        <p>Highly contagious respiratory disease caused by influenza viruses.</p>
                     </div>
-                    
-                    <div class="social-links">
-                        <a href="https://www.linkedin.com/in/kenneth-kigotho-0a1744323/" class="social-link linkedin" target="_blank">
-                            <i class="fab fa-linkedin"></i>
-                            <span>Connect on LinkedIn</span>
-                        </a>
-                        <a href="https://www.facebook.com/kenneth.kigotho/" class="social-link facebook" target="_blank">
-                            <i class="fab fa-facebook"></i>
-                            <span>Follow on Facebook</span>
-                        </a>
-                        <a href="https://twitter.com/ken_kigotho" class="social-link twitter" target="_blank">
-                            <i class="fab fa-twitter"></i>
-                            <span>Follow on Twitter</span>
-                        </a>
+                    <div class="disease-item">
+                        <h4>PRRS</h4>
+                        <p>Porcine Reproductive and Respiratory Syndrome affecting breeding stock.</p>
+                    </div>
+                    <div class="disease-item">
+                        <h4>Foot and Mouth Disease</h4>
+                        <p>Viral disease affecting cloven-hoofed animals.</p>
+                    </div>
+                    <div class="disease-item">
+                        <h4>Pneumonia</h4>
+                        <p>Respiratory infection affecting lung tissue.</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="disease-item">
+                        <h4>Swine Dysentery</h4>
+                        <p>Severe inflammatory disease of the large intestine.</p>
+                    </div>
+                    <div class="disease-item">
+                        <h4>Sarcoptic Mange</h4>
+                        <p>Skin disease caused by parasitic mites.</p>
+                    </div>
+                    <div class="disease-item">
+                        <h4>Swine Erysipelas</h4>
+                        <p>Bacterial infection causing diamond-shaped skin lesions.</p>
+                    </div>
+                    <div class="disease-item">
+                        <h4>Porcine Parvovirus</h4>
+                        <p>Viral infection affecting reproductive performance.</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="contact">
+    <section id="demo" class="demo-section">
         <div class="container">
-            <h2 class="section-title">Get in Touch</h2>
-            <div class="contact-content">
-                <div class="contact-info">
-                                        <div class="contact-item">                        <i class="fas fa-envelope"></i>                        <a href="mailto:kigothok@gmail.com">kigothok@gmail.com</a>                    </div>
-                    <div class="contact-item">
-                        <i class="fab fa-linkedin"></i>
-                        <a href="https://www.linkedin.com/in/kenneth-kigotho-0a1744323/" target="_blank">LinkedIn</a>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fab fa-youtube"></i>
-                        <a href="https://www.youtube.com/@kennethkigotho5427" target="_blank">YouTube</a>
-                    </div>
-                    <div class="contact-item">
+            <h2 class="text-center mb-5">Try the Demo</h2>
+            <div class="row justify-content-center">
+                <div class="col-md-8 text-center">
+                    <p class="lead mb-4">Experience the power of AI-driven pig health diagnostics</p>
+                    <a href="app.html" class="btn btn-light btn-lg">Launch Demo</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="tech" class="tech-stack">
+        <div class="container">
+            <h2 class="text-center mb-5">Technology Stack</h2>
+            <div class="row text-center">
+                <div class="col">
+                    <i class="fab fa-python tech-icon"></i>
+                    <p>Python</p>
+                </div>
+                <div class="col">
+                    <i class="fas fa-brain tech-icon"></i>
+                    <p>TensorFlow</p>
+                </div>
+                <div class="col">
+                    <i class="fab fa-flask tech-icon"></i>
+                    <p>Flask</p>
+                </div>
+                <div class="col">
+                    <i class="fab fa-js tech-icon"></i>
+                    <p>JavaScript</p>
+                </div>
+                <div class="col">
+                    <i class="fab fa-bootstrap tech-icon"></i>
+                    <p>Bootstrap</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-dark text-white py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 text-center text-md-start">
+                    <p>&copy; 2024 Kenneth Kigotho. All rights reserved.</p>
+                </div>
+                <div class="col-md-6 text-center text-md-end">
+                    <a href="https://github.com/KigothoKen" class="text-white me-3">
                         <i class="fab fa-github"></i>
-                        <a href="#" target="_blank">GitHub</a>
-                    </div>
+                    </a>
+                    <a href="https://linkedin.com/in/kenneth-kigotho-0a1744323" class="text-white me-3">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="https://twitter.com/ken_kigotho" class="text-white">
+                        <i class="fab fa-twitter"></i>
+                    </a>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2024 Kenneth Kigotho. All rights reserved.</p>
         </div>
     </footer>
 
-    <script src="js/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html> 
